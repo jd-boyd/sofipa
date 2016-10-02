@@ -1,0 +1,19 @@
+{
+  "name": "sofipa",
+  "version": "0.1.0",
+  "description": "Tool to sort/filter/paginate html lists, tables, and collections.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jd-boyd/sofipa.git"
+  },
+  "author": "Joshua D. Boyd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jd-boyd/sofipa/issues"
+  },
+  "homepage": "https://github.com/jd-boyd/sofipa#readme"
+}
