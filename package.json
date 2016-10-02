@@ -15,5 +15,18 @@
   "bugs": {
     "url": "https://github.com/jd-boyd/sofipa/issues"
   },
-  "homepage": "https://github.com/jd-boyd/sofipa#readme"
+  "homepage": "https://github.com/jd-boyd/sofipa#readme",
+  "dependencies" : {
+    "jquery": "3.1.0",
+    "underscore": "1.8.3"
+  },
+  "devDependencies" : {
+    "eslint": "1.10.x",
+    "gulp": "3.9.1",
+    "gulp-sass": "2.3.2",
+    "babel": "6.5.2",
+    "babel-preset-es2015": "6.16.0",
+    "babel-preset-react": "6.16.0",
+    "gulp-babel": "6.1.2"
+  }
 }
