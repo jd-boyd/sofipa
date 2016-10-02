@@ -1,28 +1,21 @@
 const gulp = require('gulp');
-const sass = require('gulp-sass');
 const babel = require('gulp-babel');
-const jasmine = require('gulp-jasmin');
-
-gulp.task('css-build', function () {
-    gulp.src(['./scss/**/*.css'])
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./static/'));
-});
+const jasmine = require('gulp-jasmine');
 
 gulp.task('js-build', function () {
-   gulp.src(['./src/**/*.js'])
+    gulp.src(['./src/**/*.js'])
         .pipe(babel({
             presets: ['es2015']
         }))
-   .pipe(gulp.dest('./dist/'));
+	.pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('test-build', function () {
-   gulp.src(['./tests/**/*.js'])
+    gulp.src(['./tests/**/*.js'])
         .pipe(babel({
             presets: ['es2015']
         }))
-   .pipe(gulp.dest('./spec/'));
+	.pipe(gulp.dest('./spec/'));
 });
 
 gulp.task("run-tests", ["js-build", "test-build"], function () {
@@ -30,8 +23,6 @@ gulp.task("run-tests", ["js-build", "test-build"], function () {
         .pipe(jasmine());
 });
 
-gulp.task('default', ['js-build'],
-	  function() {
-	      // place code for your default task here
-	  }
-	 );
+gulp.task('default', ['js-build'], function() {
+    // place code for your default task here
+});
