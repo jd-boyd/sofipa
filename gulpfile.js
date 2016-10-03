@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
-const jasmine = require('gulp-jasmine');
+const jasmine = require('gulp-jasmine-phantom');
 
 gulp.task('js-build', function () {
     gulp.src(['./src/**/*.js'])
@@ -19,8 +19,10 @@ gulp.task('test-build', function () {
 });
 
 gulp.task("run-tests", ["js-build", "test-build"], function () {
-    gulp.src('spec/test.js')
-        .pipe(jasmine());
+    gulp.src(['dist/*.js', 'spec/test.js'])
+        .pipe(jasmine({
+		integration: true
+	}));
 });
 
 gulp.task('default', ['js-build'], function() {
