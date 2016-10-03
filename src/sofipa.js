@@ -1,11 +1,8 @@
-const PAGE_SIZE=100;
-const EL_P_PAGE=4;
-
 // Data is {data-key: [vals]}
-export function data_match(el, data) {
+function data_match(el, data) {
     for (const k in data) {
 	if (data.hasOwnProperty(k)) {
-	    console.log('looking at', k, data[k], el.dataset[k]);
+	    console.log('looking at', k, data[k], el.getAttribute("data-"+k)); //el.dataset[k]);
 	    if (!_.contains(data[k], el.getAttribute("data-"+k))) {
 		return false;
 	    }
@@ -24,7 +21,7 @@ export function data_match(el, data) {
   get_data - Optional function to get data to filter.
   get_sort - Optional function to get data to sort by.
 */
-export class SoFiPa {
+class SoFiPa {
     constructor(list_sel, options) {
 	this.$list = $(list_sel);
 
@@ -71,10 +68,12 @@ export class SoFiPa {
 	    this.get_sort = null;
 	}
     }
+
     set_filter(data) {
 	this.filter_data = data;
 	this.update();
     }
+
     set_sort(sort_key) {
 	this.sort_key = sort_key;
 	this.update();
@@ -123,14 +122,3 @@ export class SoFiPa {
 	).appendTo(this.$list);
     }
 }
-
-//$("ul li").css({transform: "translateY(-50px)"})
-
-
-// var s = new SoFiPa("ul", "li");
-// s.sort_key = "price";
-// s.sort();
-
-// $("span").on("click", function (e) {
-//     console.log($(e.currentTarget).text());
-// });

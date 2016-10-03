@@ -1,6 +1,6 @@
 {
     "name": "sofipa",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Tool to sort/filter/paginate html lists, tables, and collections.",
     "main": "index.js",
     "scripts": {
@@ -16,13 +16,15 @@
 	"url": "https://github.com/jd-boyd/sofipa/issues"
     },
     "homepage": "https://github.com/jd-boyd/sofipa#readme",
-    "dependencies" : {
+    "dependencies": {
 	"jquery": "3.1.0",
 	"underscore": "1.8.3"
     },
-    "devDependencies" : {
+    "devDependencies": {
 	"eslint": "1.10.x",
 	"gulp": "3.9.1",
+	"gulp-concat": "2.6.0",
+	"gulp-webserver": "0.9.1",
 	"babel": "6.5.2",
 	"babel-preset-es2015": "6.16.0",
 	"babel-plugin-transform-es2015-modules-umd": "6.12.0",
