@@ -91,6 +91,11 @@ var SoFiPa = function () {
 									this.update();
 						}
 			}, {
+						key: 'get_page_count',
+						value: function get_page_count() {
+									return 0;
+						}
+			}, {
 						key: 'update',
 						value: function update() {
 									var page_count = this.get_page_count();

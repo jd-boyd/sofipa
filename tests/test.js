@@ -74,7 +74,7 @@ describe("SoFiPa Test suite", function() {
         expect(sfp.item_sel).toBe("LI");
     });
 
-    it("guess sort", function() {
+    it("sort, all visible", function() {
 
         const $par = $("body");
         const $ul =  $("<UL>");
@@ -89,7 +89,37 @@ describe("SoFiPa Test suite", function() {
         const sfp = new SoFiPa($ul, {
             sort_key: "price"
         });
-	sfp.sort();
+	sfp.update();
+
+        expect(jPluck($ul.children(), 'price'))
+	    .toEqual([1.75, 2.75, 12,  12.5, 12.75, 127]);
+
+	sfp.sort_key = "size";
+	sfp.update();
+        expect(jPluck($ul.children(), 'size'))
+	    .toEqual(['l', 'm', 'm', 's', 'xl', 'xs']);
+
+	$ul.remove();
+    });
+
+    it("filter", function() {
+
+        const $par = $("body");
+        const $ul =  $("<UL>");
+        $par.append($ul);
+
+        for (let i = 0; i < 6; i += 1) {
+            let $li = $("<LI>").text(i+1).data(test_data[i]);
+            $ul.append($li);
+        }
+
+        const sfp = new SoFiPa($ul, {
+            sort_key: "price",
+	    filter_data: {
+		"size": ['s', 'xl', 'm']
+	    }
+        });
+	sfp.update();
 
 	let ret = jPluck($ul.children(), 'price')
         expect(ret).toEqual([1.75, 2.75, 12,  12.5, 12.75, 127]);

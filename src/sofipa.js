@@ -79,6 +79,10 @@ class SoFiPa {
 	this.update();
     }
 
+    get_page_count() {
+	return 0;
+    }
+
     update() {
 	const page_count = this.get_page_count();
 	this.sort();
