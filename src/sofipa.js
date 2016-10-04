@@ -2,8 +2,8 @@
 function data_match(el, data) {
     for (const k in data) {
 	if (data.hasOwnProperty(k)) {
-	    console.log('looking at', k, data[k], el.getAttribute("data-"+k)); //el.dataset[k]);
-	    if (!_.contains(data[k], el.getAttribute("data-"+k))) {
+	    console.log('looking at', k, data[k], el.data(k));
+	    if (!_.contains(data[k], el.data(k))) {
 		return false;
 	    }
 	}
@@ -98,7 +98,7 @@ class SoFiPa {
 	$items.each(function (idx, el) {
 	    const $el = $(el);
 	    console.log($el.data());
-	    const ret = data_match(el, this.filter_data);
+	    const ret = data_match($el, this.filter_data);
 	    if (ret) {$el.show()} else {
 		$el.hide();
 		$el.appendTo(t.$list);
@@ -111,13 +111,16 @@ class SoFiPa {
 	if (_.isNull(this.sort_key) || _.isUndefined(this.sort_key)) {
 	    return;
 	}
-	this.$list.find(this.item_sel).sort(
+	var $items = this.$list.find(this.item_sel);
+	console.log('items', $items, this.sort_key);
+	$items.sort(
 	    function (a, b) {
 		const $a = $(a);
+		const $b = $(b);
 		if (!$a.is(':visible')) {
 		    return -1;
 		}
-		return $a.data(that.sort_key) < $(b).data(that.sort_key) ? -1 : 1;
+		return $a.data(that.sort_key) < $b.data(that.sort_key) ? -1 : 1;
 	    }
 	).appendTo(this.$list);
     }

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8,8 +8,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function data_match(el, data) {
 			for (var k in data) {
 						if (data.hasOwnProperty(k)) {
-									console.log('looking at', k, data[k], el.getAttribute("data-" + k)); //el.dataset[k]);
-									if (!_.contains(data[k], el.getAttribute("data-" + k))) {
+									console.log('looking at', k, data[k], el.data(k));
+									if (!_.contains(data[k], el.data(k))) {
 												return false;
 									}
 						}
@@ -79,19 +79,19 @@ var SoFiPa = function () {
 			}
 
 			_createClass(SoFiPa, [{
-						key: "set_filter",
+						key: 'set_filter',
 						value: function set_filter(data) {
 									this.filter_data = data;
 									this.update();
 						}
 			}, {
-						key: "set_sort",
+						key: 'set_sort',
 						value: function set_sort(sort_key) {
 									this.sort_key = sort_key;
 									this.update();
 						}
 			}, {
-						key: "update",
+						key: 'update',
 						value: function update() {
 									var page_count = this.get_page_count();
 									this.sort();
@@ -101,7 +101,7 @@ var SoFiPa = function () {
 									}
 						}
 			}, {
-						key: "filter",
+						key: 'filter',
 						value: function filter() {
 									var $items = this.$list.find(this.item_sel);
 									if (this.filter_data === void 0) {
@@ -112,7 +112,7 @@ var SoFiPa = function () {
 									$items.each(function (idx, el) {
 												var $el = $(el);
 												console.log($el.data());
-												var ret = data_match(el, this.filter_data);
+												var ret = data_match($el, this.filter_data);
 												if (ret) {
 															$el.show();
 												} else {
@@ -122,18 +122,21 @@ var SoFiPa = function () {
 									});
 						}
 			}, {
-						key: "sort",
+						key: 'sort',
 						value: function sort() {
 									var that = this;
 									if (_.isNull(this.sort_key) || _.isUndefined(this.sort_key)) {
 												return;
 									}
-									this.$list.find(this.item_sel).sort(function (a, b) {
+									var $items = this.$list.find(this.item_sel);
+									console.log('items', $items, this.sort_key);
+									$items.sort(function (a, b) {
 												var $a = $(a);
+												var $b = $(b);
 												if (!$a.is(':visible')) {
 															return -1;
 												}
-												return $a.data(that.sort_key) < $(b).data(that.sort_key) ? -1 : 1;
+												return $a.data(that.sort_key) < $b.data(that.sort_key) ? -1 : 1;
 									}).appendTo(this.$list);
 						}
 			}]);
