@@ -3,6 +3,7 @@ const concat = require('gulp-concat');
 const babel = require('gulp-babel');
 const jasmine = require('gulp-jasmine-phantom');
 const webserver = require('gulp-webserver');
+const Server = require('karma').Server;
 
 var paths = {
     src: ['./src/**/*.js'],
@@ -27,12 +28,11 @@ gulp.task('test-build', function () {
 	.pipe(gulp.dest('./spec/'));
 });
 
-gulp.task("run-tests", ["js-build", "test-build"], function () {
-    gulp.src(['spec/test.js'])
-        .pipe(jasmine({
-	    specHtml: "spec/SpecRunner.html",
-            integration: true
-        }));
+gulp.task("run-tests", ["js-build", "test-build"], function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
 });
 
 gulp.task('webserver', function() {
